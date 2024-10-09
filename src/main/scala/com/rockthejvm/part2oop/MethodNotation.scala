@@ -31,6 +31,7 @@ object MethodNotation {
     def unary_+ : Person =
       new Person(this.name, this.age+1, this.favoriteMovie)
 
+    // apply will let an object be invoked as an function
     def apply(x: Int): String =
       s"$name watched $favoriteMovie $x times"
   }
@@ -68,7 +69,7 @@ object MethodNotation {
     println(-mary)    // calls the unary_- method on mary
     println(mary.unary_-)   // the same
 
-    //postfix notation ( heavily discouraged , its confusing in large codebases )
+    //postfix notation (no argument ) ( heavily discouraged , its confusing in large codebases )
     println(mary.isAlive)
     println(mary isAlive)   // it's the same as above and only works if the import has been added for postfixops
 
