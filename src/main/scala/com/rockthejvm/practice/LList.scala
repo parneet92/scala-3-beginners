@@ -130,6 +130,15 @@ class DoublerList extends Transformer[Int, LList[Int]] {
   override def transform(value: Int): LList[Int] = Cons[Int](value, Cons[Int](value+1, Empty()))
 }
 
+object LList {
+  // find Test
+  @tailrec
+  def find[A](list: LList[A], predicate: Predicate[A]): A =
+    if (list.isEmpty) throw new NoSuchElementException()
+    else if (predicate.test(list.head)) list.head
+    else find(list.tail, predicate)
+}
+
 
 object LListTest {
   def main(args: Array[String]): Unit = {
@@ -170,5 +179,11 @@ object LListTest {
     //flatmap testing
     val flattened = first3Numbers.flatMap(new DoublerList)
     println(flattened)
+
+    //find Test
+    println(LList.find(first3Numbers, EvenPredicate())) //2
+    /*println(LList.find(first3Numbers, new Predicate[Int]{
+      override def test(element: Int): Boolean = element > 5
+    })) // throws a NoSuchElementException*/
   }
 }
